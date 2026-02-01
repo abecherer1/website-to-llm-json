@@ -1,6 +1,6 @@
 # 💀 The Skeletonizer
 
-> Capture the "Vibe" of any website and feed it to your LLM.
+> Capture the Vibe of any website and feed it to your LLM.
 > 
 
 `The Skeletonizer` is a lightweight browser script that distills a website into a clean, token-efficient JSON structure. It strips away the noise (scripts, SVGs, base64 images) but keeps the **structure, classes, styling, and interactive elements**.
@@ -21,7 +21,7 @@ When you want an AI to "recreate this design", pasting raw HTML is terrible:
 
 ---
 
-## 📦 Installation (Bookmarklet)
+## 📦 Installation
 
 You don't need to install anything. Just create a bookmark!
 
@@ -34,7 +34,7 @@ You don't need to install anything. Just create a bookmark!
 ## 🛠 Usage
 
 1. Go to any website you admire (e.g., Apple, Stripe, Linear).
-2. Open the Console (`F12` -> Console) OR click your Bookmarklet.
+2. Open the Console (`F12` -> Console).
 3. Paste the script (if not using bookmarklet).
 4. **A `.json` file will automatically download.**
 
