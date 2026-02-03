@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
       statusEl.textContent = msg;
       statusEl.style.color = isError ? '#A11A1A' : 'rgba(0, 66, 175, 0.6)';
     }
-    console.log('popup status:', msg);
   }
 
   setStatus('Ready');
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
-        // Skript-Injektion
         try {
           await chrome.scripting.executeScript({
             target: { tabId: tab.id },
@@ -33,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
           });
           setStatus('Collecting data...');
 
-          // Try to fetch the data object the content script placed on window
           async function fetchSkeletonData(attempts = 5, delay = 200) {
             for (let i = 0; i < attempts; i++) {
               try {
@@ -43,10 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 const data = res && res[0] && res[0].result;
                 if (data) return data;
-              } catch (e) {
-                console.warn('fetchSkeletonData attempt failed', e);
-              }
-              // small pause before retry
+              } catch (e) { }
               await new Promise(r => setTimeout(r, delay));
             }
             return null;
@@ -55,18 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
           const pageData = await fetchSkeletonData();
           if (!pageData) {
             setStatus('No data found — page blocked?', true);
-            console.warn('No skeleton data available on the page.');
             return;
           }
 
           setStatus('Analysis complete');
         } catch (e) {
-          console.error('Injection failed', e);
           setStatus('Injection failed: ' + (e.message || e), true);
           return;
         }
 
-        // Button Feedback
         const originalText = btn.innerText;
         btn.innerText = 'ANALYZING...';
         btn.style.backgroundColor = 'rgb(0, 66, 175)';
@@ -82,12 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 3000);
         }, 1000);
       } catch (err) {
-        console.error('Unexpected error in click handler', err);
         setStatus('Error: ' + (err.message || err), true);
       }
     });
   } catch (err) {
-    console.error('Popup init failed', err);
     setStatus('Initialization failed: ' + (err.message || err), true);
   }
 });
