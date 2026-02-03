@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "The Skeletonizer",
-  "version": "4.0",
+  "name": "Skeletonizer v6",
+  "version": "6.0",
   "description": "Extracts website layout & geometry for AI Vibe Coding.",
   "permissions": [
     "activeTab",
